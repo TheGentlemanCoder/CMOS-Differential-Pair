@@ -1,0 +1,36 @@
+* C:\Users\maxwe\Desktop\SPRING 2021 Documents\Engineering Design\GitHub\CMOS-Differential-Pair\final_differential_pair.asc
+M2 V_out -Vin Io 0 cmosn l=0.2u w=25u ad=8.1250u as=8.1250u pd=50.6500u ps=50.6500u
+M1 v1 Vin Io 0 cmosn l=0.2u w=25u ad=8.1250u as=8.1250 pd=50.6500u ps=50.6500u
+M4 V_out v1 VDD VDD cmosp l=0.2u w=10.7677u ad=3.4995u as=3.4995u pd=22.1854u ps=22.1854u
+M3 v1 v1 VDD VDD cmosp l=0.2u w=10.7677u ad=3.4995u as=3.4995u pd=22.1854u ps=22.1854u
+VDD VDD 0 1.2V
+VSS VSS 0 0V
+V1 Vin N005 0 AC .4
+V2 -Vin N005 0 AC -.4
+C1 V_out 0 5p
+M5 Io vb VSS VSS cmosn l=0.13u w=191.656u ad=62.2882u as=62.2882u pd=383.9620u ps=383.9620u
+M6 vb vb VSS VSS cmosn l=0.13u w=9.5828u ad=3.1144u as=3.1144u pd=19.8156u ps=19.8156u
+R1 VDD vb 11374
+V3 N005 0 0.55
+M§T1 V_out_t V_out_t N003 0 cmosn l=0.2u w=25u ad=8.1250u as=8.1250 pd=50.6500u ps=50.6500u
+M§T2 N001 N002 N003 0 cmosn l=0.2u w=25u ad=8.1250u as=8.1250 pd=50.6500u ps=50.6500u
+M§T3 V_out_t N001 Vp Vp cmosp l=0.2u w=10.7677u ad=3.4995u as=3.4995u pd=22.1854u ps=22.1854u
+M§T4 N001 N001 Vp Vp cmosp l=0.2u w=10.7677u ad=3.4995u as=3.4995u pd=22.1854u ps=22.1854u
+M§T5 N003 N004 0 0 cmosn l=0.13u w=191.656u ad=62.2882u as=62.2882u pd=383.9620u ps=383.9620u
+M§TB1 N004 N004 0 0 cmosn l=0.13u w=9.5828u ad=3.1144u as=3.1144u pd=19.8156u ps=19.8156u
+RB1 Vp N004 11374
+Vp Vp 0 1.2 AC 1
+Vcm2 N002 0 0.6
+C2 V_out_t 0 5p
+.model NMOS NMOS
+.model PMOS PMOS
+.lib C:\Users\maxwe\Documents\LTspiceXVII\lib\cmp\standard.mos
+*.ac dec 100 1 200000000
+.include cmos_013_bsim4.mod
+.op
+*Ap = V_out2 / Vp
+*Ad = V_out / Vi+
+*PSRR = |Ad / Ap| =(V(v_out)/(V(vin)-V(-vin)))  /  (V(v_out_t)/V(vp))
+.ac dec 100 5 100Meg
+.backanno
+.end
